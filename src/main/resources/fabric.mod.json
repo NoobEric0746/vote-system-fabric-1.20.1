@@ -3,13 +3,14 @@
 	"id": "vote-system",
 	"version": "${version}",
 	"name": "Vote System",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "This is a vote system",
 	"authors": [
-		"Me!"
+		"NoobEric0746",
+		"Badnuker"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/NoobEric0746/vote-system-fabric-1.20.1"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/vote-system/icon.png",
@@ -20,6 +21,9 @@
 		],
 		"fabric-datagen": [
 			"com.nooberic.vote.VoteSystemDataGenerator"
+		],
+		"client": [
+			"com.nooberic.vote.VoteSystemClient"
 		]
 	},
 	"mixins": [
