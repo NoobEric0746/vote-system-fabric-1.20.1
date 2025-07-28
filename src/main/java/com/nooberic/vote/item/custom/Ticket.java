@@ -25,20 +25,13 @@ public class Ticket extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient) {
-            PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeInt(VoteManager.voteItems.size());
-            for (Item item : VoteManager.voteItems) {
-                buf.writeItemStack(new ItemStack(item));
-            }
-            ServerPlayNetworking.send((ServerPlayerEntity) user, ModMessage.VOTE_LIST_ID, buf);
-        } else {
-            openVoteScreen();
+            VoteManager.updVotes(user,true);
         }
         return TypedActionResult.success(user.getStackInHand(hand));
     }
 
     @Environment(EnvType.CLIENT)
-    private void openVoteScreen() {
+    public static void openVoteScreen() {
         MinecraftClient.getInstance().setScreen(new VoteScreen());
     }
 

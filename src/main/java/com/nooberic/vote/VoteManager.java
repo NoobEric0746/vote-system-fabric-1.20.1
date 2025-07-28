@@ -1,6 +1,17 @@
 package com.nooberic.vote;
 
+import com.nooberic.vote.networking.ModMessage;
+import com.nooberic.vote.screen.VoteScreen;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.*;
 
@@ -13,6 +24,16 @@ public class VoteManager {
             voteItems.add(item);
             votes.putIfAbsent(item, 0);
         }
+    }
+
+    public static void updVotes(PlayerEntity user, Boolean openScreen){
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeBoolean(true);
+        buf.writeInt(VoteManager.voteItems.size());
+        for (Item item : VoteManager.voteItems) {
+            buf.writeItemStack(new ItemStack(item));
+        }
+        ServerPlayNetworking.send((ServerPlayerEntity) user, ModMessage.VOTE_LIST_ID, buf);
     }
 
     public void voteFor(Item item) {
