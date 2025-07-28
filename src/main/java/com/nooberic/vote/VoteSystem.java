@@ -28,7 +28,7 @@ public class VoteSystem implements ModInitializer {
 
         ModItems.registerModItems();
         ModItemGroups.registerModItemsGroups();
-        ModMessage.registerS2CPackets();
+        ModMessage.registerServerPackets();
 
         // 注册命令
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {

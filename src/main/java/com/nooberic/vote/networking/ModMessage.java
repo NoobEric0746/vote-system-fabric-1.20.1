@@ -13,13 +13,14 @@ public class ModMessage {
     public static final Identifier VOTE_LIST_ID = new Identifier(VoteSystem.MOD_ID, "vote_list");
     public static final Identifier VOTE_DATA_ID = new Identifier(VoteSystem.MOD_ID, "vote_data");
 
-    @Environment(EnvType.CLIENT)
-    public static void registerC2SPackets() {
+    // 服务端注册
+    public static void registerServerPackets() {
         ServerPlayNetworking.registerGlobalReceiver(VOTE_DATA_ID, VoteDataC2SPacket::receive);
     }
 
-    public static void registerS2CPackets() {
+    // 客户端注册
+    @Environment(EnvType.CLIENT)
+    public static void registerClientPackets() {
         ClientPlayNetworking.registerGlobalReceiver(VOTE_LIST_ID, VoteListS2CPacket::receive);
     }
-
 }

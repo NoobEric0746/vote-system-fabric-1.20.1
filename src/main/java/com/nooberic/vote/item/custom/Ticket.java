@@ -5,7 +5,6 @@ import com.nooberic.vote.networking.ModMessage;
 import com.nooberic.vote.screen.VoteScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
@@ -25,18 +24,14 @@ public class Ticket extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-//        if (world.isClient) {
-//            openVoteScreen();
-//        }
-        if(!world.isClient){
+        if (!world.isClient) {
             PacketByteBuf buf = PacketByteBufs.create();
             buf.writeInt(VoteManager.voteItems.size());
-            for(int i=0;i<VoteManager.voteItems.size();i++){
-                buf.writeItemStack(new ItemStack(VoteManager.voteItems.get(i)));
+            for (Item item : VoteManager.voteItems) {
+                buf.writeItemStack(new ItemStack(item));
             }
-            ServerPlayNetworking.send((ServerPlayerEntity) user,ModMessage.VOTE_LIST_ID, buf);
-        }
-        else{
+            ServerPlayNetworking.send((ServerPlayerEntity) user, ModMessage.VOTE_LIST_ID, buf);
+        } else {
             openVoteScreen();
         }
         return TypedActionResult.success(user.getStackInHand(hand));
@@ -46,4 +41,5 @@ public class Ticket extends Item {
     private void openVoteScreen() {
         MinecraftClient.getInstance().setScreen(new VoteScreen());
     }
+
 }
