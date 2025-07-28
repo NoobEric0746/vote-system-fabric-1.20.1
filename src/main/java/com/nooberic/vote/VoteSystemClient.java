@@ -7,6 +7,6 @@ public class VoteSystemClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ModMessage.registerC2SPackets();
+        ModMessage.registerClientPackets();
     }
 }

@@ -1,6 +1,5 @@
 package com.nooberic.vote.screen;
 
-import com.nooberic.vote.VoteSystem;
 import com.nooberic.vote.networking.ModMessage;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

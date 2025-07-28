@@ -33,8 +33,8 @@ public class VoteScreen extends Screen {
 
             Item item = items.get(startIndex + i);
             addDrawableChild(new ItemButtonWidget(
-                    30 + (i/8) * 120,
-                    30 + (i%8) * 20,
+                    30 + (i / 8) * 120,
+                    30 + (i % 8) * 20,
                     100, 18,
                     new ItemStack(item),
                     Text.translatable(item.getTranslationKey()),
