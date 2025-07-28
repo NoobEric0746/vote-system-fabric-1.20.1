@@ -11,7 +11,7 @@ import net.minecraft.text.Text;
 import java.util.List;
 
 public class VoteScreen extends Screen {
-    private static final int ITEMS_PER_PAGE = 27;
+    private static final int ITEMS_PER_PAGE = 24;
     private int currentPage = 0;
 
     public VoteScreen() {
@@ -30,8 +30,8 @@ public class VoteScreen extends Screen {
 
             Item item = items.get(startIndex + i);
             addDrawableChild(new ItemButtonWidget(
-                    10 + (0) * 20,
-                    30 + (i) * 20,
+                    30 + (i/8) * 120,
+                    30 + (i%8) * 20,
                     100, 18,
                     new ItemStack(item),
                     Text.translatable(item.getTranslationKey()),
