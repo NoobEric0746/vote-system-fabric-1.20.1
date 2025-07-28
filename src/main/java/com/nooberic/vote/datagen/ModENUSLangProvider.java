@@ -12,5 +12,6 @@ public class ModENUSLangProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
         translationBuilder.add(ModItems.TICKET, "Ticket");
+        translationBuilder.add("item.vote-system.ticket.tooltip", "Right click to join the vote");
     }
 }
