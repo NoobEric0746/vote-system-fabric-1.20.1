@@ -3,6 +3,7 @@ package com.nooberic.vote;
 import com.nooberic.vote.command.VoteCommand;
 import com.nooberic.vote.item.ModItemGroups;
 import com.nooberic.vote.item.ModItems;
+import com.nooberic.vote.networking.ModMessage;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -27,6 +28,7 @@ public class VoteSystem implements ModInitializer {
 
         ModItems.registerModItems();
         ModItemGroups.registerModItemsGroups();
+        ModMessage.registerS2CPackets();
 
         // 注册命令
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {

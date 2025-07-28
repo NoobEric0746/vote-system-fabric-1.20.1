@@ -1,13 +1,17 @@
 package com.nooberic.vote.screen;
 
 import com.nooberic.vote.VoteSystem;
+import com.nooberic.vote.networking.ModMessage;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -36,7 +40,10 @@ public class ConfirmScreen extends Screen {
 
     private void submitVote() {
         // 记录投票
-        VoteSystem.VOTE_MANAGER.voteFor(selectedItem);
+        PacketByteBuf buf = PacketByteBufs.create();
+        buf.writeItemStack(new ItemStack(selectedItem));
+        ClientPlayNetworking.send(ModMessage.VOTE_DATA_ID, buf);
+//        VoteSystem.VOTE_MANAGER.voteFor(selectedItem);
         close();
         if (client != null && client.player != null) {
             client.player.sendMessage(Text.literal("投票成功! 感谢您的参与").formatted(Formatting.GREEN), false);

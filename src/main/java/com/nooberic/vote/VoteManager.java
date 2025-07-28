@@ -1,12 +1,17 @@
 package com.nooberic.vote;
 
+import com.nooberic.vote.networking.ModMessage;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 
 import java.util.*;
 
 public class VoteManager {
-    private final Map<Item, Integer> votes = new HashMap<>();
-    private final List<Item> voteItems = new ArrayList<>();
+    public static Map<Item, Integer> votes = new HashMap<>();
+    public static List<Item> voteItems = new ArrayList<>();
 
     public void addVoteItem(Item item) {
         if (voteItems.size() < 27 && !voteItems.contains(item)) {
@@ -16,7 +21,6 @@ public class VoteManager {
     }
 
     public void voteFor(Item item) {
-        votes.computeIfPresent(item, (k, v) -> v + 1);
     }
 
     public List<Item> getVoteItems() {
