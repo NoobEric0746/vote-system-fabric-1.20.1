@@ -30,9 +30,6 @@ public class Ticket extends Item {
         return TypedActionResult.success(user.getStackInHand(hand));
     }
 
-    @Environment(EnvType.CLIENT)
-    public static void openVoteScreen() {
-        MinecraftClient.getInstance().setScreen(new VoteScreen());
-    }
+
 
 }

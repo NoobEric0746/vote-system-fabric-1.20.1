@@ -28,9 +28,15 @@ public class VoteListS2CPacket {
         VoteManager.voteItems = list;
         if(openScreen){
             if(client.world.isClient){
-                Ticket.openVoteScreen();
+                openVoteScreen();
             }
         }
+    }
+    @Environment(EnvType.CLIENT)
+    public static void openVoteScreen() {
+        MinecraftClient.getInstance().execute(() -> {
+            MinecraftClient.getInstance().setScreen(new VoteScreen());
+        });
     }
 
 
