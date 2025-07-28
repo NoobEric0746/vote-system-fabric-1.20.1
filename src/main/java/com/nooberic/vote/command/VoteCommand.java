@@ -3,6 +3,9 @@ package com.nooberic.vote.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.nooberic.vote.VoteSystem;
+import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.command.argument.ItemStackArgument;
+import net.minecraft.command.argument.ItemStackArgumentType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.command.CommandManager;
@@ -15,15 +18,17 @@ import java.util.List;
 import java.util.Map;
 
 public class VoteCommand {
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
         // 添加投票物品命令
         dispatcher.register(CommandManager.literal("addvote")
                 .requires(source -> source.hasPermissionLevel(2))
-                .then(CommandManager.argument("item", StringArgumentType.string())
+                .then(CommandManager.argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
                         .executes(context -> {
-                            Identifier itemId = new Identifier(context.getArgument("item", String.class));
-                            Item item = Registries.ITEM.get(itemId);
+//                            Identifier itemId = new Identifier(context.getArgument("item", String.class));
+//                            Item item = Registries.ITEM.get(itemId);
 
+                            ItemStackArgument isa = ItemStackArgumentType.getItemStackArgument(context, "item");
+                            Item item = isa.getItem();
                             VoteSystem.VOTE_MANAGER.addVoteItem(item);
                             context.getSource().sendFeedback(() ->
                                     Text.literal("添加投票物品: ").append(Text.translatable(item.getTranslationKey())), true);

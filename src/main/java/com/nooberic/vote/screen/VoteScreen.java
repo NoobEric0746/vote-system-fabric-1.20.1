@@ -30,9 +30,9 @@ public class VoteScreen extends Screen {
 
             Item item = items.get(startIndex + i);
             addDrawableChild(new ItemButtonWidget(
-                    10 + (i % 9) * 20,
-                    30 + (i / 9) * 20,
-                    18, 18,
+                    10 + (0) * 20,
+                    30 + (i) * 20,
+                    100, 18,
                     new ItemStack(item),
                     Text.translatable(item.getTranslationKey()),
                     button -> openConfirmScreen(item)

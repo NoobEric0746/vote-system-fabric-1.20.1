@@ -30,7 +30,7 @@ public class VoteSystem implements ModInitializer {
 
         // 注册命令
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-            VoteCommand.register(dispatcher);
+            VoteCommand.register(dispatcher,registryAccess);
         });
 
         LOGGER.info("Hello Fabric world!");
