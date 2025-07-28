@@ -1,3 +1,4 @@
 {
-  "item.vote-system.ticket": "票券"
+  "item.vote-system.ticket": "票券",
+  "item.vote-system.ticket.tooltip": "右键使用参与投票"
 }

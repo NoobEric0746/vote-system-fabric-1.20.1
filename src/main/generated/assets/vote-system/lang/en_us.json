@@ -1,3 +1,4 @@
 {
-  "item.vote-system.ticket": "Ticket"
+  "item.vote-system.ticket": "Ticket",
+  "item.vote-system.ticket.tooltip": "Right click to join the vote"
 }
