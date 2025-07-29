@@ -1,12 +1,10 @@
 package com.nooberic.vote;
 
-import com.nooberic.vote.command.VoteCommand;
+import com.nooberic.vote.command.ModCommands;
 import com.nooberic.vote.item.ModItemGroups;
 import com.nooberic.vote.item.ModItems;
 import com.nooberic.vote.networking.ModMessage;
 import net.fabricmc.api.ModInitializer;
-
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,11 +27,7 @@ public class VoteSystem implements ModInitializer {
         ModItems.registerModItems();
         ModItemGroups.registerModItemsGroups();
         ModMessage.registerServerPackets();
-
-        // 注册命令
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-            VoteCommand.register(dispatcher,registryAccess);
-        });
+        ModCommands.registerModCommands();
 
         LOGGER.info("Hello Fabric world!");
     }

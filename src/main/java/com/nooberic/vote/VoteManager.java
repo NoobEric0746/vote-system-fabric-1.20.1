@@ -14,13 +14,21 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import java.util.*;
 
 public class VoteManager {
-    public static List<Item> voteItems_l = new ArrayList<>();
+    public static List<Item> localVoteItems = new ArrayList<>();
 
     public void addVoteItem(Item item, MinecraftServer server) {
         VoteData serverState = VoteData.getServerState(server);
         if (VoteData.voteItems.size() < 27 && !VoteData.voteItems.contains(item)) {
             VoteData.voteItems.add(item);
             VoteData.votes.putIfAbsent(item, 0);
+        }
+    }
+
+    public void removeVoteItem(Item item, MinecraftServer server) {
+        VoteData serverState = VoteData.getServerState(server);
+        if (VoteData.voteItems.contains(item)) {
+            VoteData.voteItems.remove(item);
+            VoteData.votes.remove(item);
         }
     }
 
@@ -41,7 +49,7 @@ public class VoteManager {
     }
 
     public List<Item> getVoteItems() {
-        return new ArrayList<>(voteItems_l);
+        return new ArrayList<>(localVoteItems);
     }
 
     // 获取排序后的投票结果

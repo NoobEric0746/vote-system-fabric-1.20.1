@@ -25,7 +25,7 @@ public class VoteListS2CPacket {
             ItemStack itemStack = buf.readItemStack();
             list.add(itemStack.getItem());
         }
-        VoteManager.voteItems_l = list;
+        VoteManager.localVoteItems = list;
         if (openScreen) {
             if (Objects.requireNonNull(client.world).isClient) {
                 openVoteScreen();
