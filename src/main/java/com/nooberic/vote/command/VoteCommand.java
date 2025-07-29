@@ -29,7 +29,7 @@ public class VoteCommand {
 
                             ItemStackArgument isa = ItemStackArgumentType.getItemStackArgument(context, "item");
                             Item item = isa.getItem();
-                            VoteSystem.VOTE_MANAGER.addVoteItem(item);
+                            VoteSystem.VOTE_MANAGER.addVoteItem(item,context.getSource().getServer());
                             context.getSource().sendFeedback(() ->
                                     Text.literal("添加投票物品: ").append(Text.translatable(item.getTranslationKey())), true);
                             return 1;
@@ -40,7 +40,7 @@ public class VoteCommand {
         // 查看投票结果命令
         dispatcher.register(CommandManager.literal("voteinfo")
                 .executes(context -> {
-                    List<Map.Entry<Item, Integer>> sortedVotes = VoteSystem.VOTE_MANAGER.getSortedVotes();
+                    List<Map.Entry<Item, Integer>> sortedVotes = VoteSystem.VOTE_MANAGER.getSortedVotes(context.getSource().getServer());
 
                     context.getSource().sendFeedback(() ->
                             Text.literal("===== 投票结果 =====").formatted(Formatting.GOLD), false);

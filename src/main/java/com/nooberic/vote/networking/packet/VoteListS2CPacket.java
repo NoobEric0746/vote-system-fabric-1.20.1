@@ -1,7 +1,6 @@
 package com.nooberic.vote.networking.packet;
 
 import com.nooberic.vote.VoteManager;
-import com.nooberic.vote.item.custom.Ticket;
 import com.nooberic.vote.screen.VoteScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,7 +24,7 @@ public class VoteListS2CPacket {
             ItemStack itemStack = buf.readItemStack();
             list.add(itemStack.getItem());
         }
-        VoteManager.voteItems = list;
+        VoteManager.voteItems_l = list;
         if(openScreen){
             if(client.world.isClient){
                 openVoteScreen();

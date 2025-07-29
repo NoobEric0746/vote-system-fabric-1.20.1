@@ -16,7 +16,7 @@ public class VoteDataC2SPacket {
                                ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender sender) {
         ItemStack itemStack = buf.readItemStack();
         Item item = itemStack.getItem();
-        VoteSystem.VOTE_MANAGER.voteFor(item);
+        VoteSystem.VOTE_MANAGER.voteFor(item,server);
         player.sendMessage(Text.literal("ok"));
     }
 }

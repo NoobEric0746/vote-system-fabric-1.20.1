@@ -25,7 +25,7 @@ public class Ticket extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient) {
-            VoteManager.updVotes(user,true);
+            VoteManager.updVotes(user);
         }
         return TypedActionResult.success(user.getStackInHand(hand));
     }
