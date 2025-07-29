@@ -45,7 +45,7 @@ public class ConfirmScreen extends Screen {
 //        VoteSystem.VOTE_MANAGER.voteFor(selectedItem);
         close();
         if (client != null && client.player != null) {
-            client.player.sendMessage(Text.literal("投票成功! 感谢您的参与").formatted(Formatting.GREEN), false);
+            //client.player.sendMessage(Text.literal("投票成功! 感谢您的参与").formatted(Formatting.GREEN), false);
         }
     }
 
