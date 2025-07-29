@@ -1,6 +1,5 @@
 package com.nooberic.vote.persistent;
 
-import com.mojang.logging.LogUtils;
 import com.nooberic.vote.VoteSystem;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
@@ -8,57 +7,46 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateManager;
 import net.minecraft.world.World;
-import org.slf4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class VoteData extends PersistentState {
-    private static final Logger LOGGER = LogUtils.getLogger();
     public int size = 0;
     public static Map<Item, Integer> votes = new HashMap<>();
     public static List<Item> voteItems = new ArrayList<>();
 
-    public VoteData(){
+    public VoteData() {
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         nbt.putInt("size", votes.size());
-        int idx=1;
+        int idx = 1;
         for (Map.Entry<Item, Integer> entry : votes.entrySet()) {
-            nbt.putInt(String.valueOf(idx)+"key",Item.getRawId(entry.getKey()));
-            nbt.putInt(String.valueOf(idx)+"num",entry.getValue());
+            nbt.putInt(idx + "key", Item.getRawId(entry.getKey()));
+            nbt.putInt(idx + "num", entry.getValue());
             idx++;
         }
         return nbt;
     }
 
-    public static VoteData createFromNBT(NbtCompound nbt){
+    public static VoteData createFromNBT(NbtCompound nbt) {
         VoteData state = new VoteData();
-        state.votes.clear();
-        state.voteItems.clear();
+        votes.clear();
+        voteItems.clear();
         state.size = nbt.getInt("size");
-        for(int i=1;i<=state.size;i++){
-            Item item = Item.byRawId(nbt.getInt(String.valueOf(i)+"key"));
-            Integer num = nbt.getInt(String.valueOf(i)+"num");
-            state.votes.putIfAbsent(item, num);
-            state.voteItems.add(item);
+        for (int i = 1; i <= state.size; i++) {
+            Item item = Item.byRawId(nbt.getInt(i + "key"));
+            Integer num = nbt.getInt(i + "num");
+            votes.putIfAbsent(item, num);
+            voteItems.add(item);
         }
         return state;
     }
 
-//    private static Type<VoteData> type = new Type<>(
-//            VoteData::new, // 若不存在 'StateSaverAndLoader' 则创建
-//            VoteData::createFromNBT, // 若存在 'StateSaverAndLoader' NBT, 则调用 'createFromNbt' 传入参数
-//            null // 此处理论上应为 'DataFixTypes' 的枚举，但我们直接传递为空(null)也可以
-//    );
-
     public static VoteData getServerState(MinecraftServer server) {
         // (注：如需在任意维度生效，请使用 'World.OVERWORLD' ，不要使用 'World.END' 或 'World.NETHER')
-        PersistentStateManager persistentStateManager = server.getWorld(World.OVERWORLD).getPersistentStateManager();
+        PersistentStateManager persistentStateManager = Objects.requireNonNull(server.getWorld(World.OVERWORLD)).getPersistentStateManager();
 
         // 当第一次调用了方法 'getOrCreate' 后，它会创建新的 'StateSaverAndLoader' 并将其存储于  'PersistentStateManager' 中。
         //  'getOrCreate' 的后续调用将本地的 'StateSaverAndLoader' NBT 传递给 'StateSaverAndLoader::createFromNbt'。

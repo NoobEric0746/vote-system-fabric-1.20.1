@@ -1,6 +1,5 @@
 package com.nooberic.vote.networking.packet;
 
-import com.nooberic.vote.VoteManager;
 import com.nooberic.vote.VoteSystem;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.item.Item;
@@ -16,7 +15,7 @@ public class VoteDataC2SPacket {
                                ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender sender) {
         ItemStack itemStack = buf.readItemStack();
         Item item = itemStack.getItem();
-        VoteSystem.VOTE_MANAGER.voteFor(item,server);
+        VoteSystem.VOTE_MANAGER.voteFor(item, server);
         player.sendMessage(Text.literal("ok"));
     }
 }

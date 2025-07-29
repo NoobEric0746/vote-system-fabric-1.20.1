@@ -13,6 +13,7 @@ import net.minecraft.network.PacketByteBuf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class VoteListS2CPacket {
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler handler,
@@ -25,12 +26,13 @@ public class VoteListS2CPacket {
             list.add(itemStack.getItem());
         }
         VoteManager.voteItems_l = list;
-        if(openScreen){
-            if(client.world.isClient){
+        if (openScreen) {
+            if (Objects.requireNonNull(client.world).isClient) {
                 openVoteScreen();
             }
         }
     }
+
     @Environment(EnvType.CLIENT)
     public static void openVoteScreen() {
         MinecraftClient.getInstance().execute(() -> {
