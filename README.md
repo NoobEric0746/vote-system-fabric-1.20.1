@@ -8,6 +8,8 @@
 
 ## 使用方法
 
+**运行环境：客户端+服务端**
+
 手持“票券”（`vote-system:ticket`），右键打开投票面板
 
 `/addVoteItem <item>` 添加投票物品
