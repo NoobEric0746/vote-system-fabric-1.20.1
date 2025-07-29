@@ -18,7 +18,7 @@ public class VoteManager {
 
     public void addVoteItem(Item item, MinecraftServer server) {
         VoteData serverState = VoteData.getServerState(server);
-        if (VoteData.voteItems.size() < 27 && !VoteData.voteItems.contains(item)) {
+        if (!VoteData.voteItems.contains(item)) {
             VoteData.voteItems.add(item);
             VoteData.votes.putIfAbsent(item, 0);
         }
