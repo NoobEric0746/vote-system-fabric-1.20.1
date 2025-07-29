@@ -38,6 +38,8 @@ public class VoteData extends PersistentState {
 
     public static VoteData createFromNBT(NbtCompound nbt){
         VoteData state = new VoteData();
+        state.votes.clear();
+        state.voteItems.clear();
         state.size = nbt.getInt("size");
         for(int i=1;i<=state.size;i++){
             Item item = Item.byRawId(nbt.getInt(String.valueOf(i)+"key"));
