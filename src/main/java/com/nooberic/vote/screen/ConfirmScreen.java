@@ -12,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 
 @Environment(EnvType.CLIENT)
 public class ConfirmScreen extends Screen {
@@ -42,11 +41,7 @@ public class ConfirmScreen extends Screen {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeItemStack(new ItemStack(selectedItem));
         ClientPlayNetworking.send(ModMessage.VOTE_DATA_ID, buf);
-//        VoteSystem.VOTE_MANAGER.voteFor(selectedItem);
         close();
-        if (client != null && client.player != null) {
-            //client.player.sendMessage(Text.literal("投票成功! 感谢您的参与").formatted(Formatting.GREEN), false);
-        }
     }
 
     @Override
