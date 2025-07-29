@@ -8,7 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    public static final Item TICKET = registerItems("ticket", new Ticket(new Item.Settings()));
+    public static final Item TICKET = registerItems("ticket", new Ticket(new Item.Settings().maxCount(16)));
 
     private static Item registerItems(String id, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(VoteSystem.MOD_ID, id), item);

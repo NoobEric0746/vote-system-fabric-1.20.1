@@ -18,6 +18,8 @@ public class Ticket extends Item {
         if (!world.isClient) {
             VoteManager.updVotes(user);
         }
+        user.getStackInHand(hand).decrement(1);
+        user.addExperienceLevels(5);
         return TypedActionResult.success(user.getStackInHand(hand));
     }
 }
